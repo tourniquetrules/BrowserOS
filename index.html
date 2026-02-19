@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrowserOS</title>
+  </head>
+  <body>
+    <!--
+      Single mount point. The React app controls everything inside here.
+      The OS shell renders into #root; individual app windows are portaled
+      into #portal-root so they always layer above the desktop chrome.
+    -->
+    <div id="root"></div>
+    <div id="portal-root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
