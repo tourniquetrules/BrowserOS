@@ -1,0 +1,50 @@
+.terminal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #11111b;
+  color: #cdd6f4;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 8px;
+}
+
+.output {
+  flex: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.line {
+  display: block;
+}
+
+.line.error { color: #f38ba8; }
+.line.info  { color: #89b4fa; }
+.line.prompt { color: #a6e3a1; }
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  gap: 4px;
+}
+
+.promptLabel {
+  color: #a6e3a1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #cdd6f4;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  caret-color: #89b4fa;
+}

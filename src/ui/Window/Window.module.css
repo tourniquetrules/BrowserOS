@@ -1,0 +1,117 @@
+/*
+ * Window chrome: titlebar, body, resize handles.
+ * Position is controlled by inline styles set by the Window Manager store.
+ */
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--window-body-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--window-radius);
+  box-shadow: var(--window-shadow);
+  overflow: hidden;
+  /* GPU-composited layer for smooth transforms */
+  will-change: transform;
+  transition: box-shadow var(--transition-normal);
+  min-width: 200px;
+  min-height: 120px;
+}
+
+.window.focused {
+  box-shadow: var(--window-shadow), 0 0 0 1px var(--color-accent);
+}
+
+.window.minimized {
+  display: none;
+}
+
+.window.maximized {
+  /* These will be overridden by inline styles set in Window.tsx */
+  border-radius: 0;
+  border: none;
+}
+
+/* ─── Titlebar ───────────────────────────────────────────────────────────── */
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px;
+  background: var(--window-titlebar-bg);
+  color: var(--window-titlebar-text);
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.titlebar:active {
+  cursor: grabbing;
+}
+
+.titlebar .icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.titlebar .title {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Window control buttons ─────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.ctrl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.ctrl:hover {
+  filter: brightness(1.2);
+}
+
+.ctrl.close    { background: #f38ba8; }
+.ctrl.minimize { background: #f9e2af; }
+.ctrl.maximize { background: #a6e3a1; }
+
+/* ─── Body ───────────────────────────────────────────────────────────────── */
+.body {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* ─── Resize handles ─────────────────────────────────────────────────────── */
+.resizeHandle {
+  position: absolute;
+  z-index: 10;
+}
+
+/* Edges */
+.resizeHandle[data-edge='n']  { top: 0; left: 4px; right: 4px; height: 4px; cursor: n-resize; }
+.resizeHandle[data-edge='s']  { bottom: 0; left: 4px; right: 4px; height: 4px; cursor: s-resize; }
+.resizeHandle[data-edge='e']  { top: 4px; right: 0; bottom: 4px; width: 4px; cursor: e-resize; }
+.resizeHandle[data-edge='w']  { top: 4px; left: 0; bottom: 4px; width: 4px; cursor: w-resize; }
+
+/* Corners */
+.resizeHandle[data-edge='ne'] { top: 0; right: 0; width: 8px; height: 8px; cursor: ne-resize; }
+.resizeHandle[data-edge='nw'] { top: 0; left: 0; width: 8px; height: 8px; cursor: nw-resize; }
+.resizeHandle[data-edge='se'] { bottom: 0; right: 0; width: 8px; height: 8px; cursor: se-resize; }
+.resizeHandle[data-edge='sw'] { bottom: 0; left: 0; width: 8px; height: 8px; cursor: sw-resize; }
